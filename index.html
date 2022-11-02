@@ -63,7 +63,8 @@
     </div>
 
     <script>
-        // bildet heter: orakel.jpeg
+        // Model
+        
         let oracleInput = "";
         let oracleOutput = "";
 
@@ -77,7 +78,7 @@
 
         const inputField = document.getElementById('text-input');
 
-        const outputDiv =  document.getElementById('output-div');
+        
 
         //kun en testfunksjon
         function testOnChange(){
@@ -87,6 +88,8 @@
            inputField.value = '';
            console.log(makeArrayFromString(oracleInput));
         }
+
+        //Controller
 
         function onInput(){
             oracleInput = String(inputField.value);
@@ -103,7 +106,7 @@
 
         function createOutput(){
             
-            //let word1 = inputAsArray[0];
+            
             
             
             if(inputAsArray.length >= 3){
@@ -120,16 +123,9 @@
             else return "";    
 
 
-
-
-
         }
 
         
-
-        function showOutput(){
-            outputDiv.innerHTML = oracleOutput;
-        }
 
         function getRandomValue(min, max){
             return min + Math.floor(Math.random() * (max - min + 1));
@@ -169,6 +165,15 @@
             }
 
             return outputWords;
+        }
+
+
+        //View
+
+        const outputDiv =  document.getElementById('output-div');
+
+        function showOutput(){
+            outputDiv.innerHTML = oracleOutput;
         }
 
          
