@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orakelet</title>
+    <style>
+        #page{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #input-div{
+            width: 500px;
+            height: 200px;
+            border: 1px solid black;
+            line-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+
+        }
+        #text-input{
+            width: 80%;
+        }
+
+        #bilde-div{
+            width: 500px;
+            height: 400px;
+            border: 1px solid black;
+
+
+
+        }
+        img {
+            width: 500px;
+            height: 400px;
+        }
+        #output-div{
+            font-size: xx-large;
+            width: 500px;
+            height: 400px;
+            border: 1px solid black;
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="page">
+        <div id="input-div">
+            <input type="text" id="text-input" onchange="onInput()" />
+        </div>
+        <div id="bilde-div"><img src="orakel.jpeg" alt="Orakel"></div>
+        <div id="output-div"></div>
+    </div>
+
+    <script>
+        // bildet heter: orakel.jpeg
+        let oracleInput = "";
+        let oracleOutput = "";
+
+        let inputAsArray = [];//burde kanskje hete words
+
+        const substantiv = ['bil', 'båt', 'hus', 'sykkel', 'maskin', 'Terje'];
+        const verb = ['er', 'kan', 'kjører', 'klarer', 'bor'];
+        const pronomen = ['han', 'hun', 'den', 'det', 'som'];
+        const preposisjoner = ['av', 'bak', 'blant', 'etter', 'for', 'fra', 'gjennom', 'hos', 'i', 'ifølge', 'innen', 'innenfor', 'med', 'mellom', 'mot', 'om', 'omkring', 'ovenfor', 'på', 'rundt', 'til', 'under'];
+        const adjektiv = ['bra', 'dårlig', 'pent', 'ustadig', 'tåkete'];
+
+        const inputField = document.getElementById('text-input');
+
+        const outputDiv =  document.getElementById('output-div');
+
+        //kun en testfunksjon
+        function testOnChange(){
+            oracleInput = String(inputField.value);
+
+           outputDiv.innerHTML = "Onchange funker! " + oracleInput;
+           inputField.value = '';
+           console.log(makeArrayFromString(oracleInput));
+        }
+
+        function onInput(){
+            oracleInput = String(inputField.value);
+            inputField.value = '';
+
+            inputAsArray = makeArrayFromString(oracleInput); //
+
+            console.log(inputAsArray);
+        
+            oracleOutput = createOutput();
+            showOutput();
+
+        }
+
+        function createOutput(){
+            
+            //let word1 = inputAsArray[0];
+            
+            
+            if(inputAsArray.length >= 3){
+
+                if (inputAsArray[0].toLowerCase() == 'hvordan') return inputAsArray[2] + " " + inputAsArray[1] + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)];
+                
+                else if(inputAsArray[0].toLowerCase() == 'hva') return inputAsArray[2] + " " + inputAsArray[1] + " en " + substantiv[getRandomValue(0, substantiv.length - 1)];
+                else if(inputAsArray[0].toLowerCase() == 'hvorfor') return "Fordi " + inputAsArray[2] + " " + inputAsArray[1] + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)];
+                else return pronomen[getRandomValue(0, pronomen.length - 1)] + " " + verb[getRandomValue(0, verb.length - 1)] 
+                    + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)] + " " + preposisjoner[getRandomValue(0, preposisjoner.length - 1)] + " " 
+                    + substantiv[getRandomValue(0, substantiv.length - 1)];
+            }
+
+            else return "";    
+
+
+
+
+
+        }
+
+        
+
+        function showOutput(){
+            outputDiv.innerHTML = oracleOutput;
+        }
+
+        function getRandomValue(min, max){
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function makeArrayFromString(inputSentence){
+            const outputWords = [];
+            let wordStartIndex = 0;
+            for(let index = 0; index < inputSentence.length; index++){
+                //dersom algoritmen møter på et mellomrom:
+                if (inputSentence[index] == ' '){
+                    
+                    let word = "";
+                    for(let j = 0; j < (index - wordStartIndex); j++){
+                        word += inputSentence[wordStartIndex + j];
+                        
+                    }
+                    
+                    outputWords.push(word);
+                    wordStartIndex = index + 1;
+                    index = wordStartIndex;
+                }
+                //dersom algoritmen har kommet til enden av setningen:
+                else if(index == (inputSentence.length - 1)){
+                    let word = "";
+                    for(let j = 0; j < (index - wordStartIndex) +1; j++){
+                        word += inputSentence[wordStartIndex + j];
+                        
+                    }
+                    
+                    outputWords.push(word);
+                    wordStartIndex = index + 1;
+                    index = wordStartIndex;
+
+                }    
+
+            }
+
+            return outputWords;
+        }
+
+         
+
+
+    </script>
+    
+</body>
+</html>
