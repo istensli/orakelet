@@ -64,7 +64,7 @@
 
     <script>
         // Model
-        
+
         let oracleInput = "";
         let oracleOutput = "";
 
@@ -124,6 +124,23 @@
 
 
         }
+
+        function getSubstantiv(){
+            return substantiv[getRandomValue(0, substantiv.length - 1)];
+        }
+        function getVerb(){
+            return verb[getRandomValue(0, verb.length - 1)];
+        }
+        function getPronomen(){
+            return pronomen[getRandomValue(0, pronomen.length - 1)];
+        }
+        function getPreposisjon(){
+            return preposisjoner[getRandomValue(0, preposisjoner.length - 1)];
+        }
+        function getAdjektiv(){
+            return adjektiv[getRandomValue(0, adjektiv.length - 1)];
+        }
+
 
         
 
