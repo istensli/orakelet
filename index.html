@@ -111,13 +111,13 @@
             
             if(inputAsArray.length >= 3){
 
-                if (inputAsArray[0].toLowerCase() == 'hvordan') return inputAsArray[2] + " " + inputAsArray[1] + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)];
+                if (inputAsArray[0].toLowerCase() == 'hvordan') return inputAsArray[2] + " " + inputAsArray[1] + " " + getAdjektiv();
                 
-                else if(inputAsArray[0].toLowerCase() == 'hva') return inputAsArray[2] + " " + inputAsArray[1] + " en " + substantiv[getRandomValue(0, substantiv.length - 1)];
-                else if(inputAsArray[0].toLowerCase() == 'hvorfor') return "Fordi " + inputAsArray[2] + " " + inputAsArray[1] + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)];
-                else return pronomen[getRandomValue(0, pronomen.length - 1)] + " " + verb[getRandomValue(0, verb.length - 1)] 
-                    + " " + adjektiv[getRandomValue(0, adjektiv.length - 1)] + " " + preposisjoner[getRandomValue(0, preposisjoner.length - 1)] + " " 
-                    + substantiv[getRandomValue(0, substantiv.length - 1)];
+                else if(inputAsArray[0].toLowerCase() == 'hva') return inputAsArray[2] + " " + inputAsArray[1] + " en " + getSubstantiv();
+                else if(inputAsArray[0].toLowerCase() == 'hvorfor') return "Fordi " + inputAsArray[2] + " " + inputAsArray[1] + " " + getAdjektiv();
+                else return getPronomen() + " " + getVerb() 
+                    + " " + getAdjektiv() + " " + getPreposisjon() + " " 
+                    + getSubstantiv();
             }
 
             else return "";    
